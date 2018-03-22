@@ -20,7 +20,7 @@ export class Day {
       }
       request.open("GET", url, true);
       request.send();
-    })
+    });
     // let that = this;
     // let url = `https://blockchain.info/blocks/${this.dateMS}?format=json`;
     // $.get(url).then(function(results) {
@@ -29,6 +29,23 @@ export class Day {
     // }).fail(function() {
     //   that.results = 'Error in request';
     // });
+  }
+
+  getTransactions(block) {
+    let hash = block.hash;
+    return new Promise(function(resolve, reject) {
+      let url = `https://blockchain.info/rawblock/${hash}`;
+      let request = new XMLHttpRequest();
+      request.onload = function() {
+        if (this.status === 200) {
+          resolve(request.response);
+        } else {
+          reject(Error(request.statusText));
+        }
+      }
+      request.open("GET", url, true);
+      request.send();
+    });
   }
 
 

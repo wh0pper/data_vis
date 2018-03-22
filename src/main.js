@@ -14,6 +14,7 @@ $(document).ready(function() {
       body = JSON.parse(response);
       console.log(body);
       $('#output').text(`Number of blocks mined on ${date}: ` + body.blocks.length);
+      
     }, function(error) {
       console.log(error.message);
     });
